@@ -1,0 +1,45 @@
+# XcodeGen project specification.
+# Regenerate the .xcodeproj at any time with:  xcodegen generate
+# (Install XcodeGen once with:  brew install xcodegen)
+#
+# Using a text spec instead of a hand-edited .xcodeproj means:
+#   - new files added by Claude/you are picked up by re-running `xcodegen generate`
+#   - no binary project.pbxproj merge conflicts
+#   - the whole project is reproducible from source control
+
+name: PhotoScanner
+
+options:
+  bundleIdPrefix: com.example
+  deploymentTarget:
+    iOS: "16.0"
+  createIntermediateGroups: true
+
+settings:
+  base:
+    MARKETING_VERSION: "1.0"
+    CURRENT_PROJECT_VERSION: "1"
+    SWIFT_VERSION: "5.0"
+    # DEVELOPMENT_TEAM is intentionally blank. Set your team in Xcode:
+    # target > Signing & Capabilities > Team, or fill it in below.
+    DEVELOPMENT_TEAM: ""
+
+targets:
+  PhotoScanner:
+    type: application
+    platform: iOS
+    sources:
+      - path: Sources
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.example.PhotoScanner
+        TARGETED_DEVICE_FAMILY: "1"        # iPhone only
+        GENERATE_INFOPLIST_FILE: YES
+        ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
+        ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME: AccentColor
+        # --- Info.plist values injected via build settings (no Info.plist file to maintain) ---
+        INFOPLIST_KEY_NSCameraUsageDescription: "Used to scan your physical photos."
+        INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription: "Saves your scanned photos to your Photos library."
+        INFOPLIST_KEY_UISupportedInterfaceOrientations: "UIInterfaceOrientationPortrait"
+        INFOPLIST_KEY_UIUserInterfaceStyle: "Dark"   # dark default reduces glare on glossy prints (PRD §13)
+        INFOPLIST_KEY_UILaunchScreen_Generation: YES
